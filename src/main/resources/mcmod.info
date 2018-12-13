@@ -1,0 +1,16 @@
+[
+{
+  "modid": "stoneblockdimensions",
+  "name": "StoneBlock Dimensions",
+  "description": "Empty.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["FTB_lag"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
