@@ -1,6 +1,5 @@
 package ftblag.stoneblockdimensions;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.math.BlockPos;
@@ -9,42 +8,20 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @Mod.EventBusSubscriber(modid = StoneBlockDimensions.MODID)
 public class SBUEvents {
 
-    public static Map<String, Integer> invulnerabilityPlayers = new HashMap<>();
-
-    @SubscribeEvent
-    public static void onDamage(LivingHurtEvent e) {
-        if (e.getEntity() instanceof EntityPlayer && !e.getEntity().world.isRemote)
-            if (invulnerabilityPlayers.containsKey(e.getEntity().getName()))
-                e.setAmount(0);
-    }
-
     @SubscribeEvent
     public static void move(TickEvent.PlayerTickEvent e) {
-        if (!e.side.isServer() || e.phase == Phase.START) {
+        if (e.player.world.isRemote || e.phase == Phase.END) {
             return;
         }
-
-        if (!invulnerabilityPlayers.isEmpty())
-            for (String str : invulnerabilityPlayers.keySet()) {
-                int curr = invulnerabilityPlayers.get(str) - 1;
-                if (curr <= 0)
-                    invulnerabilityPlayers.remove(str);
-                else
-                    invulnerabilityPlayers.put(str, curr);
-            }
 
         EntityPlayerMP player = (EntityPlayerMP) e.player;
         if (player.timeUntilPortal > 0) {
@@ -87,9 +64,12 @@ public class SBUEvents {
         if (player.timeUntilPortal > 0) {
             return;
         }
+        if(player.world.isRemote){
+            return;
+        }
         WorldServer worldServer = player.server.getWorld(dim);
         player.timeUntilPortal = SBUConfig.tp_cooldown;
-        player.server.getPlayerList().transferPlayerToDimension(player, dim, new SBUTeleporter(worldServer, toSpawn ? worldServer.getSpawnCoordinate() : new BlockPos(player.posX, y, player.posZ)));
+        player.changeDimension(dim, new SBUTeleporter(worldServer, toSpawn ? worldServer.getSpawnCoordinate() : new BlockPos(player.posX, y, player.posZ)));
         player.timeUntilPortal = SBUConfig.tp_cooldown;
     }
 
