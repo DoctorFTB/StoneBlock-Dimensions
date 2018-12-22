@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.MapGenBase;
 
-public class MapGenCustomCaves extends MapGenBase // Copy from vanilla with delete lava/water
+public class MapGenCustomCaves extends MapGenBase
 {
     protected static final IBlockState BLK_STONE = Blocks.STONE.getDefaultState();
     protected static final IBlockState BLK_AIR = Blocks.AIR.getDefaultState();

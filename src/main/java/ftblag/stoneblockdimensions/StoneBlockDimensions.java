@@ -3,6 +3,7 @@ package ftblag.stoneblockdimensions;
 import ftblag.stoneblockdimensions.end.EW_WorldProvider;
 import ftblag.stoneblockdimensions.mining.MW_WorldProvider;
 import ftblag.stoneblockdimensions.portal.BlockNullEndPortal;
+import ftblag.stoneblockdimensions.portal.BlockNullNetherPortal;
 import ftblag.stoneblockdimensions.portal.EndPortalReplacer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
@@ -35,6 +36,8 @@ public class StoneBlockDimensions {
         DimensionManager.registerDimension(typeEW.getId(), typeEW);
         if (SBUConfig.disableEnd)
             EndPortalReplacer.replaceBlock(Blocks.END_PORTAL, BlockNullEndPortal.class, ItemBlock.class);
+        if (SBUConfig.disableNether)
+            EndPortalReplacer.replaceBlock(Blocks.PORTAL, BlockNullNetherPortal.class, ItemBlock.class);
         MinecraftForge.TERRAIN_GEN_BUS.register(new SBUEventsTerrain());
     }
 

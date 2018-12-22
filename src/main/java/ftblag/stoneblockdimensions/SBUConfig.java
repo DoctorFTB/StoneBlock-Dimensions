@@ -2,9 +2,6 @@ package ftblag.stoneblockdimensions;
 
 import net.minecraftforge.common.config.Config;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Config(modid = StoneBlockDimensions.MODID)
 public class SBUConfig {
 
@@ -63,9 +60,5 @@ public class SBUConfig {
 
     @Config.Name("teleporterWhiteList")
     @Config.Comment("Blocks from this list can deleted by teleporter")
-    public static String[] teleporterWhiteList = { };
-
-    @Config.Name("invulnerabilityTime")
-    @Config.Comment("Invulnerability time after teleport in ticks")
-    public static int invulnerabilityTime = 1200;
+    public static String[] teleporterWhiteList = {};
 }
