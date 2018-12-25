@@ -77,6 +77,6 @@ public class EW_WorldProvider extends WorldProvider {
 
     @Override
     public DimensionType getDimensionType() {
-        return StoneBlockDimensions.typeMW;
+        return StoneBlockDimensions.typeEW;
     }
 }
