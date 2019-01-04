@@ -30,7 +30,7 @@ public class EW_ChunkGenerator implements IChunkGenerator {
         for (x = 0; x < 16; x++) {
             for (y = 0; y < 256; y++) {
                 for (z = 0; z < 16; z++) {
-                    primer.setBlockState(x, y, z, y == 1 || y == 255 ? bedrock : end_stone);
+                    primer.setBlockState(x, y, z, y == 0 || y == 255 ? bedrock : end_stone);
                 }
             }
         }
