@@ -58,10 +58,20 @@ public class MW_ChunkGenerator implements IChunkGenerator {
         IBlockState bedrock = Blocks.BEDROCK.getDefaultState();
         int x1, y1, z1;
         for (x1 = 0; x1 < 16; x1++) {
-            for (y1 = 0; y1 < 256; y1++) {
+            for (z1 = 0; z1 < 16; z1++) {
+                primer.setBlockState(x1, 0, z1, bedrock);
+            }
+        }
+        for (x1 = 0; x1 < 16; x1++) {
+            for (y1 = 1; y1 < 255; y1++) {
                 for (z1 = 0; z1 < 16; z1++) {
-                    primer.setBlockState(x1, y1, z1, y1 == 0 || y1 == 255 ? bedrock : stone);
+                    primer.setBlockState(x1, y1, z1, stone);
                 }
+            }
+        }
+        for (x1 = 0; x1 < 16; x1++) {
+            for (z1 = 0; z1 < 16; z1++) {
+                primer.setBlockState(x1, 255, z1, bedrock);
             }
         }
 

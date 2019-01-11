@@ -28,10 +28,20 @@ public class EW_ChunkGenerator implements IChunkGenerator {
         IBlockState bedrock = Blocks.BEDROCK.getDefaultState();
         int x, y, z;
         for (x = 0; x < 16; x++) {
-            for (y = 0; y < 256; y++) {
+            for (z = 0; z < 16; z++) {
+                primer.setBlockState(x, 0, z, bedrock);
+            }
+        }
+        for (x = 0; x < 16; x++) {
+            for (y = 1; y < 255; y++) {
                 for (z = 0; z < 16; z++) {
-                    primer.setBlockState(x, y, z, y == 0 || y == 255 ? bedrock : end_stone);
+                    primer.setBlockState(x, y, z, end_stone);
                 }
+            }
+        }
+        for (x = 0; x < 16; x++) {
+            for (z = 0; z < 16; z++) {
+                primer.setBlockState(x, 255, z, bedrock);
             }
         }
     }
