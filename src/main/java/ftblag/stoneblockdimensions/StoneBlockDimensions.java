@@ -39,6 +39,7 @@ public class StoneBlockDimensions {
         if (SBUConfig.disableNether)
             EndPortalReplacer.replaceBlock(Blocks.PORTAL, BlockNullNetherPortal.class, ItemBlock.class);
         MinecraftForge.TERRAIN_GEN_BUS.register(new SBUEventsTerrain());
+        ResourceLocationMeta.updateArrayList();
     }
 
     @Mod.EventHandler
